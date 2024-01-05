@@ -1,3 +1,7 @@
+// Описаний в документації
+import SimpleLightbox from "simplelightbox";
+// Додатковий імпорт стилів
+import "simplelightbox/dist/simple-lightbox.min.css";
 const images = [
     {
       preview: 'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg',
@@ -56,31 +60,9 @@ const images = [
     .join('');
   
   gallery.innerHTML = markup;
-  gallery.addEventListener('click', galleryClick);
-  
-  function galleryClick(event) {
-    event.preventDefault();
-    if (event.target === event.currentTarget) {
-      return;
-    }
-  
-    const original = event.target.dataset.sourse;
-    const description = event.target.alt;
-    const closeModal = event => {
-      if (event.code === 'Escape') {
-        instance.close();
-      }
-    };
-    const instance = basicLightbox.create(
-      `<div class="modal"><a class="modal-link" href="${original}"><img class="modal-image" src="${original}" data-sourse="${original}" alt="${description}"/></a></div>`,
-      {
-        onShow: () => {
-          document.addEventListener('keydown', closeModal);
-        },
-        onClose: () => {
-          document.removeEventListener('keydown', closeModal);
-        },
-      }
-    );
-    instance.show();
-  }
+  let lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionPosition: 'bottom',
+    captionDelay: 250,
+  });
+ 
