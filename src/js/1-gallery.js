@@ -58,8 +58,9 @@ const images = [
         `<li class="gallery-item"><a class="gallery-link" href="${original}"><img class="gallery-image" src="${preview}" data-sourse="${original}" alt="${description}"/></a></li>`
     )
     .join('');
-  
-  gallery.innerHTML = markup;
+
+    gallery.insertAdjacentHTML('beforeend', markup);
+
   let lightbox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
     captionPosition: 'bottom',
